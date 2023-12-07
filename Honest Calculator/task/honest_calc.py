@@ -2,16 +2,28 @@
 msg_0 = "Enter an equation"
 msg_1 = "Do you even know what numbers are? Stay focused!"
 msg_2 = "Yes ... an interesting math operation. You've slept through all classes, haven't you?"
-digits = "0123456789"
-opers = "+-*/"
+msg_3 = "Yeah... division by zero. Smart move..."
+
+
+def calculator(x, oper, y):
+    if oper == "+":
+        return x + y
+    elif oper == "-":
+        return x - y
+    elif oper == "*":
+        return x * y
+    elif oper == "/":
+        if y == 0:
+            return None
+        else:
+            return x / y
+
 
 is_valid = False
 
 while not is_valid:
 
-    calc = input(msg_0)
-
-    x, oper, y = calc.split()
+    x, oper, y = input(msg_0).split()
 
     try:
         x = float(x)
@@ -20,8 +32,17 @@ while not is_valid:
         print(msg_1)
         continue
 
-    if oper not in opers:
+    if oper not in "+-*/":
         print(msg_2)
         continue
 
-    is_valid = True
+    result = calculator(x, oper, y)
+
+    if result is None:
+        print(msg_3)
+        continue
+    else:
+        is_valid = True
+        print(result)
+
+
