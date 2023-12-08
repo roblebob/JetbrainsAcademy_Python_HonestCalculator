@@ -68,9 +68,24 @@ files:
       
       if __name__ == '__main__':    HonestCalc().run_tests()
     learner_created: false
-feedback_link: https://hyperskill.org/projects/208/stages/1040/implement#comment
-status: Solved
+feedback_link: https://hyperskill.org/learn/step/15811#comment
+status: Failed
 feedback:
-  message: Congratulations!
-  time: "Thu, 07 Dec 2023 20:18:20 UTC"
-record: -1
+  message: |-
+    Wrong answer in test #1
+
+    Expected: (3.1)
+    Found:    (3.1
+    Do you want to store the result? (y / n):)
+
+    Please find below the output of your program during this failed test.
+    Note that the '>' character indicates the beginning of the input line.
+
+    ---
+
+    Enter an equation
+    > 2 + 1.1
+    3.1
+    Do you want to store the result? (y / n):
+  time: "Thu, 07 Dec 2023 21:39:23 UTC"
+record: 3
