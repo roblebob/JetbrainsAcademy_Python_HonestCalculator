@@ -1,14 +1,20 @@
 # write your code here
-msg_0 = "Enter an equation"
-msg_1 = "Do you even know what numbers are? Stay focused!"
-msg_2 = "Yes ... an interesting math operation. You've slept through all classes, haven't you?"
-msg_3 = "Yeah... division by zero. Smart move..."
-msg_4 = "Do you want to store the result? (y / n):"
-msg_5 = "Do you want to continue calculations? (y / n):"
-msg_6 = " ... lazy"
-msg_7 = " ... very lazy"
-msg_8 = " ... very, very lazy"
-msg_9 = "You are"
+
+msg_ = [
+    "Enter an equation",
+    "Do you even know what numbers are? Stay focused!",
+    "Yes ... an interesting math operation. You've slept through all classes, haven't you?",
+    "Yeah... division by zero. Smart move...",
+    "Do you want to store the result? (y / n):",
+    "Do you want to continue calculations? (y / n):",
+    " ... lazy",
+    " ... very lazy",
+    " ... very, very lazy",
+    "You are",
+    "Are you sure? It is only one digit! (y / n)",
+    "Don't be silly! It's just one number! Add to the memory? (y / n)",
+    "Last chance! Do you really want to embarrass yourself? (y / n)",
+]
 
 memory = 0.0
 
@@ -43,29 +49,46 @@ def is_one_digit(x):
 def check(x, oper, y):
     msg = ""
     if is_one_digit(x) and is_one_digit(y):
-        msg = msg + msg_6
+        msg = msg + msg_[6]
     if (x == 1 or y == 1) and oper == "*":
-        msg = msg + msg_7
+        msg = msg + msg_[7]
     if (x == 0 or y == 0) and oper in "*+-":
-        msg = msg + msg_8
+        msg = msg + msg_[8]
     if msg != "":
-        msg = msg_9 + msg
+        msg = msg_[9] + msg
         print(msg)
+
+
+def store_result(value):
+    global memory
+    msg_index = 10 if is_one_digit(value) else None
+    while msg_index is not None:
+
+        print(msg_[msg_index])
+        _answer = input()
+        if _answer not in "yn":
+            continue
+        elif _answer == "n":
+            return
+
+        msg_index = msg_index + 1 if _answer == "y" and msg_index < 12 else None
+
+    memory = value
 
 
 finished = False
 while not finished:
 
-    print(msg_0)
+    print(msg_[0])
     x, oper, y = input().split()
 
     x, y = assign_var(x), assign_var(y)
     if x is None or y is None:
-        print(msg_1)
+        print(msg_[1])
         continue
 
     if oper not in "+-*/":
-        print(msg_2)
+        print(msg_[2])
         continue
 
     check(x, oper, y)
@@ -73,21 +96,21 @@ while not finished:
     result = calculator(x, oper, y)
 
     if result is None:
-        print(msg_3)
+        print(msg_[3])
         continue
 
     print(result)
 
     answer = ""
     while answer != "y" and answer != "n":
-        print(msg_4)
+        print(msg_[4])
         answer = input()
         if answer == "y":
-            memory = result
+            store_result(result)
 
     answer = ""
     while answer != "y" and answer != "n":
-        print(msg_5)
+        print(msg_[5])
         answer = input()
         if answer == "n":
             finished = True
